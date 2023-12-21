@@ -31,6 +31,10 @@ class register extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 registerAdmin();
+                // Close the registration form
+                dispose();
+                // Open the login form
+                new login().setVisible(true);
             }
         });
 
@@ -53,10 +57,8 @@ class register extends JFrame {
 
         // Melakukan koneksi ke database menggunakan kelas Conn
         try (Connection connection = Conn.connect()) {
-
             // Query untuk memasukkan data ke dalam tabel admin
-            String query = "INSERT INTO admin (username, password) VALUES (?, ?)";
-
+            String query = "INSERT INTO register (username, password) VALUES (?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
                 preparedStatement.setString(2, password);
@@ -82,4 +84,3 @@ class register extends JFrame {
         });
     }
 }
-
